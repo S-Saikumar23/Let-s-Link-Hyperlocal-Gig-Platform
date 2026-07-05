@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: letslink
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sai123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:sai123@db:5432/letslink
+      DATABASE_URL_SYNC: postgresql://postgres:sai123@db:5432/letslink
+      SECRET_KEY: 7c0da4783e417effe1e83f259f02ba02aa8a0edc2bee24479a3bdc9e53a44517
+      RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID:-rzp_test_T39qzrQbCcjx8J}
+      RAZORPAY_KEY_SECRET: ${RAZORPAY_KEY_SECRET:-EApmryEVcfq58lmWbO5k9AZx}
+      DEBUG: "True"
+      ALLOWED_ORIGINS: '["http://localhost:3000","http://localhost:8000"]'
+    volumes:
+      - uploads:/app/backend/uploads
+
+volumes:
+  pgdata:
+  uploads:

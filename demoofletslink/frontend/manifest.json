@@ -1,0 +1,20 @@
+{
+  "name": "Let's Link",
+  "short_name": "LetsLink",
+  "description": "Get things done, right in your neighborhood. Connect with skilled people nearby for home repairs, deliveries, errands, and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a14",
+  "theme_color": "#6C5CE7",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%236C5CE7' width='100' height='100' rx='20'/><text y='.9em' x='.05em' font-size='90'>🔗</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "utilities"],
+  "lang": "en"
+}
